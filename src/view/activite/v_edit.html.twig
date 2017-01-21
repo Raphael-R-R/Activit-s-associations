@@ -1,0 +1,71 @@
+{% extends 'v_layout.html.twig' %}
+{% block contenu %}
+    <form method="post" action="{{ path('activite.editActiviteConfirm') }}">
+        <div class="row">
+            <fieldset>
+                <legend>Modifier activité</legend>
+
+                <input name="token" type="hidden" value="{% if app.session.get('token') is defined %}{{ app.session.get('token') }}{% endif %}" />
+
+                <label>
+                    Nom :
+                    <input name="nom" type="text" size="18" value="{{ data.nom | default("") }}" />
+                    {% if error.nom is defined %}
+                        <small class="error">{{ error.nom }}</small>
+                    {% endif %}
+                </label>
+                <label>
+                    Lieu :
+                    <select name="id_lieu">
+                        {% if data.id_lieu is not defined or data.id_lieu is empty %}
+                            <option value="">Veuillez sélectionner un lieu</option>
+                        {% endif %}
+
+                        {% for lieu in listeLieux %}
+                            <option value="{{ lieu.id_lieu }}"
+                                    {% if data.id_lieu is defined and lieu.id_lieu == data.id_lieu %}selected{% endif %}>
+                                {{ lieu.nom_lieu }}
+                            </option>
+                        {% endfor %}
+                    </select>
+
+                    {% if error.id_lieu is defined %}
+                        <small class="error">{{ error.id_lieu }}</small>
+                    {% endif %}
+                </label>
+                <label>
+                    Type :
+                    <select name="type">
+                        {% if data.type is not defined or data.type is empty %}
+                            <option value="">Veuillez sélectionner un type</option>
+                        {% endif %}
+
+                        <option value="sport" {% if data.type == 'sport' %}selected{% endif %}>Sport</option>
+                        <option value="loisir" {% if data.type == 'loisir' %}selected{% endif %}>Loisir</option>
+                    </select>
+
+                    {% if error.type is defined %}
+                        <small class="error">{{ error.type }}</small>
+                    {% endif %}
+                </label>
+                <label>
+                    Coût :
+                    <input name="cout" type="text" size="18" value="{{ data.cout | default("") }}" />
+                    {% if error.cout is defined %}
+                        <small class="error">{{ error.cout }}</small>
+                    {% endif %}
+                </label>
+                <label>
+                    Date de création (format : JJ-MM-AAAA) :
+                    <input name="date" type="text" value="{{ data.date | default("") }}" />
+                    {% if error.date is defined %}
+                        <small class="error">{{ error.date }}</small>
+                    {% endif %}
+                </label>
+
+                <input type="hidden" name="id" value="{{ data.id }}">
+                <input type="submit" name="editActivite" value="Modifier" />
+            </fieldset>
+        </div>
+    </form>
+{% endblock %}

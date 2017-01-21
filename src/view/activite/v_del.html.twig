@@ -1,0 +1,22 @@
+{% extends 'v_layout.html.twig' %}
+{% block contenu %}
+    <div class="row">
+        <fieldset>
+            <legend>Confirmation la suppression de cette activitée ?</legend>
+
+            <ul>
+                <li>Nom : {{ data.nomActivite }}</li>
+                <li>Type : {{ data.type }}</li>
+                <li>Lieu : {{ data.nom_lieu }}</li>
+                <li>Coût : {{ data.coutInscription }}</li>
+                <li>Date création : {{ data.dateCreation }}</li>
+            </ul>
+
+            <form method="post" action="{{ path('activite.deleteActiviteConfirm') }}">
+                <input type="hidden" name="id" value="{{ data.idActivite }}" />
+                <input type="submit" name="deleteConfirm" value="Oui" />
+                <input type="submit" name="deleteConfirm" value="Non" />
+            </form>
+        </fieldset>
+    </div>
+{% endblock %}

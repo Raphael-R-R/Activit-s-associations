@@ -1,0 +1,29 @@
+<nav class="top-bar" data-topbar role="navigation">
+    <ul class="title-area">
+        <li class="name">
+            <h1><a href="{{ path('index') }}">Activités association</a></h1>
+        </li>
+        <li class="toggle-topbar menu-icon">
+            <a href="#"><span>Menu</span></a>
+        </li>
+    </ul>
+    <section class="top-bar-section">
+        <ul class="left">
+            <li class="divider"></li>
+            {% if app.session.get('right') is defined and app.session.get('right') == 'adminRight' %}
+            <li><a href="{{ path('lieu.showLieux') }}">Lieux</a></li>
+            <li><a href="{{ path('activite.showActivite') }}">Afficher/Ajouter/Editer/Supprimer les activités</a></li>
+            {% else %}
+            <li><a href="{{ path('activite.showActivite') }}">Afficher les activités</a></li>
+            {% endif %}
+            <li class="divider"></li>
+        </ul>
+        <ul class="right">
+            {% if app.session.get('right') is defined and app.session.get('right') == 'adminRight' %}
+            <li><a href="{{ path('logout') }}">Bonjour {{ app.session.get('login') }} | Se déconnecter</a></li>
+            {% else %}
+            <li><a href="{{ path('login') }}">Se connecter</a></li>
+            {% endif %}
+        </ul>
+    </section>
+</nav>

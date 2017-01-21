@@ -1,0 +1,22 @@
+{% extends "v_layout.html.twig" %}
+{% block contenu %}
+    <div class="row">
+        <h3>Liste des lieux</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Numéro</th>
+                    <th>Nom</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for lieu in data if data is not empty %}
+                <tr>
+                    <td>{{ lieu.id_lieu }}</td>
+                    <td>{{ lieu.nom_lieu }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </di>
+{% endblock %}

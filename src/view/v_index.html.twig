@@ -1,0 +1,16 @@
+{% extends "v_layout.html.twig" %}
+{% block contenu %}
+    <div class="row">
+        <h3>Bienvenue sur l'espace de gestion de l'association</h3>
+
+        <fieldset>
+            <legend>Que souhaitez vous faire ?</legend>
+
+            <a href="{{ path('activite.showActivite') }}">Voir la liste des activités</a>
+            {% if app.session.get('right') is defined and app.session.get('right') == 'adminRight' %}
+            <br />
+            <a href="{{ path('lieu.showLieux') }}">Voir la liste des lieux</a>
+            {% endif %}
+        </fieldset>
+    </div>
+{% endblock %}

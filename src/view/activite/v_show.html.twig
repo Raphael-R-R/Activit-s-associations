@@ -1,0 +1,46 @@
+{% extends "v_layout.html.twig" %}
+{% block contenu %}
+    <div class="row">
+        <h3>Liste des activités</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Numéro</th>
+                    <th>Nom</th>
+                    <th>Lieu</th>
+                    <th>Type</th>
+                    <th>Coût inscription</th>
+                    <th>Créee le</th>
+                    {% if app.session.get('right') is defined and app.session.get('right') == 'adminRight' %}
+                    <th>Opération</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for activite in data if data is not empty %}
+                <tr>
+                    <td>{{ activite.idActivite }}</td>
+                    <td>{{ activite.nomActivite }}</td>
+                    <td>{{ activite.nom_lieu }}</td>
+                    <td>{{ activite.type }}</td>
+                    <td>{{ activite.coutInscription }}</td>
+                    <td>{{ activite.dateCreation }}</td>
+                    {% if app.session.get('right') is defined and app.session.get('right') == 'adminRight' %}
+                    <td>
+                        <a href="{{ path('activite.editActivite', {id:activite.idActivite}) }}">Modifier</a> |
+                        <a href="{{ path('activite.deleteActivite', {id:activite.idActivite}) }}">Supprimer</a>
+                    </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+                {% if app.session.get('right') is defined and app.session.get('right') == 'adminRight' %}
+                <tr>
+                    <td rowspan="7">
+                        <a href="{{ path('activite.addActivite') }}">&#8594; Créer un enregistrement</a>
+                    </td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </di>
+{% endblock %}
