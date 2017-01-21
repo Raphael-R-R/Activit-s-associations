@@ -1,4 +1,4 @@
-# Activit-s-associations
+# Activités-associations
 Projet web fait pour l'IUT de Belfort-Montbéliard visant à programmer un site avec Silex
 
 ### Installation
